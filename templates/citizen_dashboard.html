@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizen Dashboard | CITINOVA AI</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f7fb;
+            color: #19314d;
+        }
+
+        header {
+            background: white;
+            border-bottom: 1px solid #e3ebf3;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-size: 23px; font-weight: 800; }
+        .logo span { color: #159fc3; }
+
+        .logout {
+            text-decoration: none;
+            background: #eaf5fa;
+            color: #147fae;
+            padding: 10px 17px;
+            border-radius: 7px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        main { max-width: 1150px; margin: 35px auto; padding: 0 22px; }
+
+        .welcome {
+            margin-bottom: 28px;
+        }
+
+        .welcome h1 { font-size: 29px; margin-bottom: 8px; }
+        .welcome p { color: #75869a; font-size: 14px; }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 23px;
+            border-radius: 12px;
+            border: 1px solid #e4ebf2;
+        }
+
+        .card small { color: #7b8da2; font-size: 12px; }
+        .card h2 { margin-top: 12px; font-size: 27px; }
+        .card-icon { font-size: 25px; margin-bottom: 13px; }
+
+        .section {
+            background: white;
+            border: 1px solid #e4ebf2;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 23px;
+        }
+
+        .section h2 { font-size: 19px; margin-bottom: 18px; }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .action {
+            display: block;
+            text-decoration: none;
+            color: #19314d;
+            border: 1px solid #e1eaf2;
+            border-radius: 10px;
+            padding: 19px;
+            background: #fbfdff;
+        }
+
+        .action strong { display: block; margin-bottom: 7px; }
+        .action span { color: #75869a; font-size: 13px; line-height: 1.6; }
+
+        .report-button {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background: #147fae;
+            padding: 11px 17px;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 12px;
+        }
+
+        .table-wrap { overflow-x: auto; }
+
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+
+        th, td {
+            text-align: left;
+            padding: 13px 10px;
+            border-bottom: 1px solid #edf1f5;
+        }
+
+        th { color: #78889c; font-weight: 600; }
+
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: #fff5dc;
+            color: #9b7117;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .empty { color: #78889c; font-size: 14px; padding: 15px 0; }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #8998a9;
+            font-size: 12px;
+        }
+
+        @media(max-width: 700px) {
+            .cards { grid-template-columns: 1fr; }
+            .action-grid { grid-template-columns: 1fr; }
+            .welcome h1 { font-size: 24px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">CITI<span>NOVA</span> AI.</div>
+    <a href="{{ url_for('logout') }}" class="logout">Logout ↗</a>
+</header>
+
+<main>
+
+    <div class="welcome">
+        <h1>Welcome, {{ session.get('name', 'Citizen') }} 👋</h1>
+        <p>Your citizen dashboard for smarter and safer urban mobility.</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-icon">📋</div>
+            <small>My Road Reports</small>
+            <h2>{{ reports|length }}</h2>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">⏳</div>
+            <small>Pending Reports</small>
+            <h2>{{ reports|selectattr('status', 'equalto', 'Pending')|list|length }}</h2>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🚦</div>
+            <small>Traffic Information</small>
+            <h2>Coming Soon</h2>
+        </div>
+
+    </div>
+
+    <section class="section">
+        <h2>Citizen Services</h2>
+
+        <div class="action-grid">
+
+            <div class="action">
+                <strong>🛣️ Report a Road Issue</strong>
+                <span>Report potholes, damaged roads and other infrastructure problems.</span>
+                <br>
+                <a href="#" class="report-button">Reporting module — Next phase</a>
+            </div>
+
+            <div class="action">
+                <strong>🚗 Traffic Information</strong>
+                <span>View traffic conditions and congestion information when connected.</span>
+                <br>
+                <a href="#" class="report-button">Traffic module — Next phase</a>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>My Submitted Reports</h2>
+
+        {% if reports %}
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Report ID</th>
+                            <th>Issue</th>
+                            <th>Location</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for report in reports %}
+                        <tr>
+                            <td>#{{ report.id }}</td>
+                            <td>{{ report.issue_type }}</td>
+                            <td>{{ report.location }}</td>
+                            <td>{{ report.created_at }}</td>
+                            <td><span class="status">{{ report.status }}</span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="empty">You haven't submitted any road reports yet.</p>
+        {% endif %}
+
+    </section>
+
+</main>
+
+<footer>
+    CITINOVA AI | Reimagining Urban Mobility
+</footer>
+
+</body>
+</html>

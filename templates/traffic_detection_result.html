@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Analysis Results | CITINOVA AI</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: Arial, sans-serif;
+            background: #f3f6fa;
+            color: #17243a;
+        }
+        .container { max-width: 1050px; margin: auto; }
+        .header {
+            background: #102c50;
+            color: white;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+        .header h1 { margin: 0 0 8px; }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,.06);
+        }
+        .number { font-size: 30px; font-weight: bold; color: #1264a3; }
+        .muted { color: #64748b; }
+        video { width: 100%; border-radius: 10px; background: #111; }
+        .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+        .btn {
+            display: inline-block;
+            padding: 12px 18px;
+            border-radius: 7px;
+            background: #1264a3;
+            color: white;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+        .secondary { background: #475569; }
+        .note { margin-top: 18px; font-size: 13px; color: #64748b; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>AI Traffic Analysis Results</h1>
+        <p>CITINOVA AI — Vehicle Detection Report</p>
+    </div>
+
+    <div class="statistics">
+        <div class="card">
+            <p class="muted">Detection Instances</p>
+            <div class="number">{{ statistics.get('total_detection_instances', 0) }}</div>
+        </div>
+        <div class="card">
+            <p class="muted">Frames Processed</p>
+            <div class="number">{{ statistics.get('frames_processed', 0) }}</div>
+        </div>
+        <div class="card">
+            <p class="muted">Average Vehicles / Frame</p>
+            <div class="number">{{statistics.get('average_vehicles_per_frame', 0) }}</div>
+        </div>
+        <div class="card">
+            <p class="muted">Processing Time</p>
+            <div class="number">{{ statistics.get('processing_time_seconds', 0) }} s</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Vehicle Classification</h2>
+        {% for vehicle, count in statistics.get('class_detection_instances', {}).items() %}
+            <p><strong>{{ vehicle }}:</strong> {{ count }}</p>
+        {% else %}
+            <p>No vehicle detections recorded.</p>
+        {% endfor %}
+    </div>
+
+    <div class="card" style="margin-top: 20px;">
+        <h2>Processed Traffic Video</h2>
+        <video controls>
+            <source src="{{ url_for('processed_traffic_video', filename=video_filename) }}" type="video/mp4">
+            Your browser does not support video playback.
+        </video>
+
+        <div class="actions">
+            <a class="btn" href="{{ url_for('processed_traffic_video', filename=video_filename) }}" download>
+                Download Processed Video
+            </a>
+            <a class="btn secondary" href="{{ url_for('traffic_detection') }}">
+                Analyse Another Video
+            </a>
+            <a class="btn secondary" href="{{ url_for('authority_dashboard') }}">
+                Back to Dashboard
+            </a>
+        </div>
+
+        <p class="note">
+            Note: Detection instances count vehicle detections across processed frames.
+            They do not represent unique vehicles.
+        </p>
+    </div>
+</div>
+</body>
+</html>

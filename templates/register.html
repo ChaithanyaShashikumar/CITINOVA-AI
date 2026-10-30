@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizen Registration | CITINOVA AI</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f7fc;
+            color: #172b45;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 25px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 460px;
+            background: white;
+            padding: 38px;
+            border-radius: 15px;
+            border: 1px solid #e5edf5;
+            box-shadow: 0 15px 45px rgba(27,58,91,.08);
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 800;
+            color: #142b49;
+            margin-bottom: 30px;
+        }
+
+        .logo span { color: #159fc3; }
+
+        .eyebrow {
+            color: #159fc3;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        h1 { font-size: 27px; margin-bottom: 9px; }
+
+        .subtitle {
+            color: #78889c;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 23px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            margin: 16px 0 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #dce5ef;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #159fc3;
+            box-shadow: 0 0 0 3px rgba(21,159,195,.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 24px;
+            border: none;
+            border-radius: 8px;
+            background: #147fae;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover { background: #106b94; }
+
+        .message {
+            padding: 11px;
+            margin-bottom: 12px;
+            border-radius: 7px;
+            font-size: 13px;
+            background: #fff0ef;
+            color: #b33a32;
+        }
+
+        .message.success {
+            background: #e8f8ef;
+            color: #197447;
+        }
+
+        .bottom {
+            text-align: center;
+            margin-top: 22px;
+            font-size: 13px;
+            color: #78889c;
+        }
+
+        a {
+            color: #147fae;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="logo">CITI<span>NOVA</span> AI.</div>
+
+    <div class="eyebrow">JOIN THE SMART CITY</div>
+
+    <h1>Create your account</h1>
+
+    <p class="subtitle">
+        Register as a citizen to access traffic information
+        and report road infrastructure issues.
+    </p>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="message {{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endwith %}
+
+    <form method="POST" id="registerForm">
+
+        <label for="name">Full Name</label>
+        <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter your full name"
+            required
+        >
+
+        <label for="email">Email Address</label>
+        <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+        >
+
+        <label for="password">Password</label>
+        <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Minimum 8 characters"
+            minlength="8"
+            required
+        >
+
+        <label for="confirm_password">Confirm Password</label>
+        <input
+            type="password"
+            id="confirm_password"
+            placeholder="Re-enter your password"
+            minlength="8"
+            required
+        >
+
+        <button type="submit">Create Citizen Account →</button>
+
+    </form>
+
+    <div class="bottom">
+        Already registered?
+        <a href="{{ url_for('login', role='citizen') }}">Sign in</a>
+    </div>
+
+    <a href="/" class="back">← Back to CITINOVA AI</a>
+
+</div>
+
+<script>
+    document.getElementById("registerForm").addEventListener("submit", function(event) {
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirm_password").value;
+
+        if (password !== confirmPassword) {
+            event.preventDefault();
+            alert("Passwords do not match. Please try again.");
+        }
+    });
+</script>
+
+</body>
+</html>

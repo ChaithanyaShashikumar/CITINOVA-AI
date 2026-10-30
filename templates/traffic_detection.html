@@ -1,0 +1,76 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CITINOVA AI | Traffic Detection</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f5fa;
+            color: #172b4d;
+        }
+        header {
+            background: #102b50;
+            color: white;
+            padding: 22px 7%;
+        }
+        main {
+            max-width: 850px;
+            margin: 45px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px #00000012;
+        }
+        h2 { color: #123b68; }
+        .upload {
+            border: 2px dashed #7c9bbd;
+            border-radius: 10px;
+            padding: 35px;
+            text-align: center;
+            margin: 25px 0;
+        }
+        input { margin-top: 15px; }
+        button {
+            background: #145da0;
+            color: white;
+            border: 0;
+            padding: 13px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        button:hover { background: #0d4478; }
+        .note { color: #64748b; font-size: 14px; }
+        a { color: white; }
+    </style>
+</head>
+<body>
+    <header>
+        <h2 style="color:white;">CITINOVA AI — Traffic Intelligence</h2>
+        <a href="{{ url_for('authority_dashboard') }}">← Back to Dashboard</a>
+    </header>
+
+    <main>
+        <h2>AI Vehicle Detection</h2>
+        <p>Upload a traffic video to analyse vehicles using the YOLO AI detection model.</p>
+
+        <form action="{{ url_for('process_traffic_video') }}"
+              method="POST" enctype="multipart/form-data">
+
+            <div class="upload">
+                <h3>Select Traffic Video</h3>
+                <input type="file" name="traffic_video"
+                       accept="video/*" required>
+                <p class="note">Select a supported traffic video file.</p>
+            </div>
+
+            <button type="submit">Analyse Traffic Video</button>
+        </form>
+    </main>
+</body>
+</html>
+```

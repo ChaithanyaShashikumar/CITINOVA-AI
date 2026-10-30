@@ -1,0 +1,53 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Database
+instance/
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploaded and generated videos
+data/uploads/
+data/videos/
+results/
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.webm
+
+# Model weights
+*.pt
+*.pth
+*.onnx
+*.engine
+*.safetensors
+*.joblib
+*.pkl
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+# Local backup files
+app_backup_before_yolo.py
+
+simulation/*.backup.py
+simulation/*.backup.xml

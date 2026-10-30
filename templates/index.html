@@ -1,0 +1,656 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CITINOVA AI | Urban Traffic Management</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fff;
+    color: #252d39;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* TOP INFORMATION BAR */
+
+.topbar {
+    height: 29px;
+    background: #fff5d8;
+    color: #454545;
+    padding: 0 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+}
+
+/* HEADER */
+
+header {
+    min-height: 83px;
+    padding: 12px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    border-bottom: 1px solid #e6e6e6;
+    gap: 20px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.brand-emblem {
+    width: 53px;
+    height: 53px;
+    background: #f7f2e7;
+    border: 1px solid #e8dcc2;
+    border-radius: 5px;
+    display: grid;
+    place-items: center;
+    font-size: 29px;
+}
+
+.brand h1 {
+    color: #173b69;
+    font-size: 25px;
+    letter-spacing: -.5px;
+}
+
+.brand p {
+    font-size: 10px;
+    color: #737d89;
+    margin-top: 4px;
+    letter-spacing: .7px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.header-actions a {
+    padding: 11px 21px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.login-btn {
+    color: #174b83;
+    border: 1px solid #174b83;
+}
+
+.register-btn {
+    color: white;
+    background: #2464a5;
+}
+
+/* NAVIGATION */
+
+nav {
+    background: #174675;
+    min-height: 44px;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    font-size: 12px;
+    padding: 14px 0;
+}
+
+nav a:hover {
+    color: #ffdc9a;
+}
+
+/* ANNOUNCEMENT */
+
+.announcement {
+    background: #f8f8f8;
+    border-bottom: 1px solid #e6e6e6;
+    min-height: 34px;
+    padding: 8px 5%;
+    font-size: 11px;
+    color: #59616a;
+}
+
+.announcement strong {
+    color: #a53d36;
+    margin-right: 12px;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 340px;
+    padding: 55px 8%;
+    background:
+        radial-gradient(ellipse at 80% 20%, rgba(185, 46, 48, .55), transparent 50%),
+        linear-gradient(110deg, #263f72 0%, #49233f 52%, #84272d 100%);
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 35px;
+    overflow: hidden;
+}
+
+.hero-content {
+    max-width: 580px;
+}
+
+.hero-label {
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+    color: #ffe0a7;
+}
+
+.hero h2 {
+    font-size: clamp(30px, 3.5vw, 43px);
+    line-height: 1.3;
+    font-weight: 500;
+    margin-bottom: 17px;
+}
+
+.hero p {
+    color: #eeeaf0;
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 550px;
+}
+
+/* DECORATIVE CITY NETWORK */
+
+.city-visual {
+    height: 230px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.city-visual svg {
+    width: 100%;
+    height: 100%;
+}
+
+.map-label {
+    position: absolute;
+    bottom: 0;
+    right: 5%;
+    color: #ffe4c1;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+/* QUICK LINKS */
+
+.quick-section {
+    position: relative;
+    max-width: 1180px;
+    margin: -24px auto 0;
+    background: white;
+    border-radius: 10px 10px 0 0;
+    padding: 20px 25px 28px;
+    z-index: 2;
+    box-shadow: 0 -4px 15px rgba(0,0,0,.04);
+}
+
+.quick-section h2 {
+    text-align: center;
+    color: #222;
+    font-size: 25px;
+    margin-bottom: 23px;
+}
+
+.quick-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+
+.quick-card {
+    background: #fff3d2;
+    border: 1px solid #f1e3bb;
+    min-height: 100px;
+    padding: 15px 11px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 7px;
+    color: #343434;
+    transition: .2s;
+}
+
+.quick-card:hover {
+    background: #ffe9b0;
+    transform: translateY(-3px);
+}
+
+.quick-card .icon {
+    font-size: 25px;
+}
+
+.quick-card strong {
+    font-size: 12px;
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+/* SERVICES */
+
+.services {
+    max-width: 1180px;
+    margin: auto;
+    padding: 20px 25px 60px;
+}
+
+.section-title {
+    text-align: center;
+    border-top: 1px solid #e3e3e3;
+    padding-top: 23px;
+    margin-bottom: 28px;
+}
+
+.section-title h2 {
+    font-size: 25px;
+    color: #222;
+    margin-bottom: 7px;
+}
+
+.section-title p {
+    font-size: 13px;
+    color: #78818c;
+}
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 17px;
+}
+
+.service-card {
+    padding: 23px;
+    border: 1px solid #e1e5e9;
+    background: white;
+    border-radius: 6px;
+    transition: .2s;
+}
+
+.service-card:hover {
+    border-color: #8daaca;
+    box-shadow: 0 5px 15px rgba(20,50,80,.07);
+}
+
+.service-card .icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+.service-card h3 {
+    font-size: 15px;
+    color: #174675;
+    margin-bottom: 8px;
+}
+
+.service-card p {
+    color: #697581;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* PORTALS */
+
+.portal-section {
+    background: #f3f6f9;
+    padding: 45px 7%;
+}
+
+.portal-section h2 {
+    text-align: center;
+    color: #173b69;
+    margin-bottom: 25px;
+}
+
+.portal-grid {
+    max-width: 950px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.portal-card {
+    background: white;
+    border: 1px solid #dce4ec;
+    border-top: 4px solid #c58a38;
+    border-radius: 5px;
+    padding: 25px;
+}
+
+.portal-card h3 {
+    color: #174675;
+    margin-bottom: 10px;
+    font-size: 19px;
+}
+
+.portal-card p {
+    font-size: 13px;
+    color: #687787;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.portal-card a {
+    display: inline-block;
+    padding: 11px 18px;
+    background: #205b94;
+    color: white;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* FOOTER */
+
+footer {
+    background: #123454;
+    color: white;
+    padding: 27px 7%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-size: 11px;
+}
+
+footer p {
+    color: #d4e0ec;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 850px) {
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .city-visual {
+        height: 180px;
+    }
+
+    .quick-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .service-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 550px) {
+    .topbar {
+        display: none;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav {
+        gap: 18px;
+    }
+
+    .quick-grid,
+    .service-grid,
+    .portal-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding: 40px 7%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+    <span>CITINOVA AI | Urban Traffic Management</span>
+    <span>Buildathon Prototype | 2026</span>
+</div>
+
+<header>
+    <div class="brand">
+        <div class="brand-emblem">🏛️</div>
+        <div>
+            <h1>CITINOVA AI</h1>
+            <p>SMART TRAFFIC AND ROAD MANAGEMENT PORTAL</p>
+        </div>
+    </div>
+
+    <div class="header-actions">
+        <a href="/login/authority" class="login-btn">Authority Login</a>
+        <a href="/login/citizen" class="register-btn">Citizen Login</a>
+    </div>
+</header>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="#about">About Us</a>
+    <a href="#services">Our Services</a>
+    <a href="#portals">Citizen Portal</a>
+    <a href="#portals">Authority Portal</a>
+</nav>
+
+<div class="announcement">
+    <strong>PUBLIC NOTICE</strong>
+    CITINOVA AI demonstrates intelligent traffic monitoring and road management capabilities.
+</div>
+
+<section class="hero">
+
+    <div class="hero-content">
+        <div class="hero-label">WELCOME TO CITINOVA AI</div>
+
+        <h2>Delivering smarter traffic management for safer and more accessible urban mobility</h2>
+
+        <p>
+            An integrated platform for traffic monitoring, vehicle
+            detection, congestion analysis and road infrastructure
+            reporting, designed to support better urban mobility.
+        </p>
+    </div>
+
+    <div class="city-visual">
+
+        <svg viewBox="0 0 500 250" xmlns="http://www.w3.org/2000/svg">
+
+            <g fill="none" stroke="rgba(255,255,255,.23)" stroke-width="1.5">
+                <path d="M250 125 L65 35 M250 125 L120 205 M250 125 L410 30 M250 125 L445 190 M250 125 L250 10 M250 125 L250 240"/>
+                <path d="M65 35 Q150 40 250 125 Q350 210 445 190"/>
+                <path d="M120 205 Q180 90 410 30"/>
+            </g>
+
+            <g fill="#f5c9a2" stroke="#fff" stroke-width="2">
+                <circle cx="65" cy="35" r="12"/>
+                <circle cx="120" cy="205" r="12"/>
+                <circle cx="410" cy="30" r="12"/>
+                <circle cx="445" cy="190" r="12"/>
+                <circle cx="250" cy="10" r="12"/>
+                <circle cx="250" cy="240" r="12"/>
+            </g>
+
+            <g fill="#fff" opacity=".9">
+                <circle cx="250" cy="125" r="19"/>
+                <circle cx="250" cy="125" r="10" fill="#c77935"/>
+            </g>
+
+            <g fill="rgba(255,255,255,.17)">
+                <rect x="28" y="65" width="30" height="20" rx="2"/>
+                <rect x="80" y="105" width="40" height="26" rx="2"/>
+                <rect x="360" y="90" width="50" height="25" rx="2"/>
+                <rect x="390" y="135" width="34" height="30" rx="2"/>
+                <rect x="180" y="35" width="35" height="24" rx="2"/>
+            </g>
+
+            <g fill="#fff" font-size="9" font-family="Arial">
+                <text x="265" y="128">CITY NETWORK</text>
+            </g>
+
+        </svg>
+
+        <div class="map-label">CONNECTED URBAN MOBILITY</div>
+    </div>
+
+</section>
+
+<section class="quick-section">
+
+    <h2>Quick Links</h2>
+
+    <div class="quick-grid">
+
+        <a href="/login/authority" class="quick-card">
+            <span class="icon">🎥</span>
+            <strong>Traffic Video Analysis</strong>
+        </a>
+
+        <a href="/login/authority" class="quick-card">
+            <span class="icon">🚦</span>
+            <strong>Traffic Monitoring</strong>
+        </a>
+
+        <a href="/login/citizen" class="quick-card">
+            <span class="icon">🌍</span>
+            <strong>Traffic Map</strong>
+        </a>
+
+        <a href="/login/citizen" class="quick-card">
+            <span class="icon">🛣️</span>
+            <strong>Report Road Issues</strong>
+        </a>
+
+        <a href="/login/authority" class="quick-card">
+            <span class="icon">🚑</span>
+            <strong>Emergency Management</strong>
+        </a>
+
+    </div>
+
+</section>
+
+<section class="services" id="services">
+
+    <div class="section-title">
+        <h2>Know About Our Services</h2>
+        <p>Technology-enabled services for intelligent urban mobility.</p>
+    </div>
+
+    <div class="service-grid">
+
+        <div class="service-card">
+            <div class="icon">🚘</div>
+            <h3>Vehicle Detection and Counting</h3>
+            <p>Computer vision-based vehicle classification and traffic counting.</p>
+        </div>
+
+        <div class="service-card">
+            <div class="icon">🚦</div>
+            <h3>Adaptive Traffic Management</h3>
+            <p>Traffic-responsive signal optimization using SUMO simulation.</p>
+        </div>
+
+        <div class="service-card">
+            <div class="icon">🌐</div>
+            <h3>Geographic Traffic Mapping</h3>
+            <p>Road network visualization and congestion hotspot identification.</p>
+        </div>
+
+        <div class="service-card">
+            <div class="icon">📊</div>
+            <h3>Traffic Analytics</h3>
+            <p>Vehicle counts, queue indicators and waiting-time analysis.</p>
+        </div>
+
+        <div class="service-card">
+            <div class="icon">🚑</div>
+            <h3>Emergency Vehicle Priority</h3>
+            <p>Priority signal management in a controlled traffic simulation.</p>
+        </div>
+
+        <div class="service-card">
+            <div class="icon">🛣️</div>
+            <h3>Citizen Road Services</h3>
+            <p>Road issue reporting and complaint status tracking.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="portal-section" id="portals">
+
+    <h2>Access CITINOVA AI Services</h2>
+
+    <div class="portal-grid">
+
+        <div class="portal-card">
+            <h3>Citizen Services</h3>
+            <p>
+                Access the citizen portal to view available traffic
+                services and report road infrastructure issues.
+            </p>
+            <a href="/login/citizen">Citizen Login →</a>
+            <a href="/register" style="margin-left:7px;background:#fff;color:#205b94;border:1px solid #205b94;">Register</a>
+        </div>
+
+        <div class="portal-card">
+            <h3>Traffic Authority Services</h3>
+            <p>
+                Access traffic management, vehicle analysis,
+                simulation and congestion analytics tools.
+            </p>
+            <a href="/login/authority">Authority Login →</a>
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    <div>
+        <strong>CITINOVA AI</strong>
+        <p>Reimagining Urban Mobility</p>
+    </div>
+
+    <p>Buildathon Prototype | 2026</p>
+    <p>Independent civic technology demonstration</p>
+</footer>
+
+</body>
+</html>

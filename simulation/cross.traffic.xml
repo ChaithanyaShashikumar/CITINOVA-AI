@@ -1,0 +1,6 @@
+﻿<routes>
+    <flow id="flow_NS" type="car" route="north_south" begin="0" end="100" number="10"/>
+    <flow id="flow_SN" type="car" route="south_north" begin="0" end="100" number="10"/>
+    <flow id="flow_EW" type="car" route="east_west" begin="0" end="100" number="10"/>
+    <flow id="flow_WE" type="car" route="west_east" begin="0" end="100" number="10"/>
+</routes>
